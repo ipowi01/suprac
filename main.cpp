@@ -231,7 +231,7 @@ R"(
         if (isdigit(c)) {
             size_t start = cur.index;
             auto isodigit = [](int c){return (c >= '0' && c <= '7');};
-            bool hexoct = cur.peek() == 0;
+            bool hexoct = cur.peek() == '0';
             cur.next();
             if (hexoct && tolower(cur.peek()) == 'x') {
                 cur.next();
