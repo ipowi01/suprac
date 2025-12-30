@@ -174,8 +174,8 @@ R"(
         int line = cur.line;
         int col = cur.col;
         char c = cur.peek();
-        if (isblank(c)) {
-            while (cur && isblank(cur.peek())) cur.next();
+        if (isspace(c)) {
+            while (cur && isspace(cur.peek())) cur.next();
             continue;
         }
         if (c == '/' && cur.peek(1) == '/') {
@@ -236,8 +236,8 @@ R"(
             if (hexoct && tolower(cur.peek()) == 'x') {
                 cur.next();
                 while (cur && isxdigit(cur.peek())) cur.next();
-                if(!isblank(cur.peek())) {
-                    while (cur && !isblank(cur.peek())) cur.next();
+                if(!isspace(cur.peek())) {
+                    while (cur && !isspace(cur.peek())) cur.next();
                     tokens.emplace_back(token_kind::Unknown, std::string_view(&src[start], cur.index - start), line, col);
                     continue;
                 }
@@ -246,8 +246,8 @@ R"(
             }
             else if (hexoct) {
                 while (cur && isodigit(cur.peek())) cur.next();
-                if (!isblank(cur.peek())) {
-                    while (cur && !isblank(cur.peek())) cur.next();
+                if (!isspace(cur.peek())) {
+                    while (cur && !isspace(cur.peek())) cur.next();
                     tokens.emplace_back(token_kind::Unknown, std::string_view(&src[start], cur.index - start), line, col);
                     continue;
                 }
@@ -255,8 +255,8 @@ R"(
                 continue;
             } else {
                 while (cur && isdigit(cur.peek())) cur.next();
-                if(!isblank(cur.peek())) {
-                    while(cur && !isblank(cur.peek())) cur.next();
+                if(!isspace(cur.peek())) {
+                    while(cur && !isspace(cur.peek())) cur.next();
                     tokens.emplace_back(token_kind::Unknown, std::string_view(&src[start], cur.index - start), line, col);
                     continue;
                 }
